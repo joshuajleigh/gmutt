@@ -1,0 +1,117 @@
+# ~/.muttrc
+##
+## IMAP CREDENTIALS
+##
+set imap_user = "%GMAIL_LOGIN%"
+set imap_pass = "%GMAIL_PASS%"
+set smtp_url = "smtp://%GMAIL_LOGIN%@smtp.gmail.com:587/"
+set smtp_pass = "%GMAIL_PASS%"
+set from = "%GMAIL_FROM%"
+set realname = "%GMAIL_NAME%"
+
+##
+## IMAP SETTINGS
+##
+# activate TLS if available on the server
+set ssl_starttls=yes
+# always use SSL when connecting to a server
+set ssl_force_tls=yes
+# Don't wait to enter mailbox manually
+unset imap_passive
+# Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
+set imap_check_subscribed
+
+
+##
+## GMAIL SPECIFIC
+##
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed="+[Gmail]/Drafts"
+set hostname = gmail.com
+set trash="+[Gmail]/Bin" # If disabled, mail will be archived (in Gmail)
+
+##
+## GENERIC
+##
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+# Move read messages from your spool mailbox to your $mbox mailbox
+set move = no
+# Reduce polling frequency to a sane level
+set mail_check=60
+# And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
+set timeout=300
+# keep a cache of headers for faster loading (1.5.9+?)
+set header_cache=~/.hcache
+# Display download progress every 5K
+set net_inc=5
+# Don't switch to next mail when paging down in a mail and hitting bottom
+set pager_stop=yes
+# Confirm quit
+set quit=ask-yes
+set imap_check_subscribed
+set imap_keepalive = 300
+set record = "" # gmail automatically handles saving sent emails
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+
+# setting theme
+source ~/.mutt/themes/comidia
+# setting editor
+set editor=vim
+
+# view some some items inline
+auto_view text/html                                      # view html automatically
+
+# Date format in index view. Standard strftime syntax.
+set date_format="!%a, %b %d, %Y at %I:%M:%S%p %Z"
+# configuration for display format
+set index_format="%3C %Z %[!%H:%M %m.%d] %-17.17F (%5c) %s"
+
+#setting signature
+set signature="~/.mutt/signature"
+
+#setting mailcap
+set mailcap_path 	= ~/.mutt/mailcap
+
+# Index
+# vim style keymappings
+bind index j next-entry
+bind index k previous-entry
+bind index J next-thread
+bind index K previous-thread
+
+bind index / search
+#bind index ? search-reverse
+bind index n search-next
+bind index N search-opposite
+
+bind index gg first-entry
+bind index G last-entry
+
+bind index r reply
+bind index g imap-fetch-mail
+bind index R group-reply
+
+# Pager
+# vim style keymappings
+bind pager j next-line
+bind pager k previous-line
+bind pager / search
+bind pager ? search-reverse
+bind pager n search-next
+bind pager N search-opposite
+unset markers
+
